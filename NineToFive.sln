@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OfficeCountdownClock", "OfficeCountdownClock\OfficeCountdownClock.csproj", "{7B6CD87A-45EE-4A9E-B47C-91AE75021CC7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AB0B0183-BB47-49EF-91CB-1964B78BD516}"
+	ProjectSection(SolutionItems) = preProject
+		.dockerignore = .dockerignore
+		.gitignore = .gitignore
+		deploy.yml = deploy.yml
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7B6CD87A-45EE-4A9E-B47C-91AE75021CC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B6CD87A-45EE-4A9E-B47C-91AE75021CC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B6CD87A-45EE-4A9E-B47C-91AE75021CC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B6CD87A-45EE-4A9E-B47C-91AE75021CC7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3C9B03B9-2B03-43E4-9432-639F76C97061}
+	EndGlobalSection
+EndGlobal

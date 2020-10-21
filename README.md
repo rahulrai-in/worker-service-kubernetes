@@ -1,0 +1,1 @@
+## .NET Core Worker Service Kubernetes

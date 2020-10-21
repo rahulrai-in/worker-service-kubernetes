@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: demo-ns
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: worker
+  namespace: demo-ns
+  labels:
+    app: nine-to-five
+spec:
+  containers:
+  - name: nine-to-five
+    image: nine-to-five:1.0.0
+    ports:
+    - name: health-check
+      containerPort: 5000
+      hostPort: 5000
+    readinessProbe:
+      tcpSocket:
+        port: health-check
+      initialDelaySeconds: 5
+      periodSeconds: 10
+    livenessProbe:
+      tcpSocket:
+        port: health-check
+      initialDelaySeconds: 15
+      periodSeconds: 20
