@@ -1,5 +1,4 @@
 using System;
-using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
@@ -41,6 +40,8 @@ namespace OfficeCountdownClock
                 await UpdateHeartbeatAsync(stoppingToken);
                 Thread.Sleep(TimeSpan.FromSeconds(1));
             }
+
+            _listener.Stop();
         }
 
         private async Task UpdateHeartbeatAsync(CancellationToken token)
@@ -50,29 +51,20 @@ namespace OfficeCountdownClock
                 // Get health check results
                 var result = await _healthCheckService.CheckHealthAsync(token);
                 var isHealthy = result.Status == HealthStatus.Healthy;
-                _logger.LogInformation($"Health check status: {isHealthy}");
 
-                if (isHealthy && !_listener.Server.IsBound)
+                if (!isHealthy)
                 {
-                    _logger.LogWarning("Application healthy - starting TCP listener.");
-                    _listener.Start();
-                }
-
-                if (!isHealthy && _listener.Server.IsBound)
-                {
-                    _logger.LogWarning("Application unhealthy - stopping TCP listener.");
                     _listener.Stop();
+                    _logger.LogInformation("Service is unhealthy. Listener stopped.");
+                    return;
                 }
 
+                _listener.Start();
                 while (_listener.Server.IsBound && _listener.Pending())
                 {
                     var client = await _listener.AcceptTcpClientAsync();
-                    var stream = client.GetStream();
-                    var writer = new StreamWriter(stream);
-                    await writer.WriteLineAsync("OK");
-                    await stream.FlushAsync(token);
                     client.Close();
-                    _logger.LogInformation("Processed health check request.");
+                    _logger.LogInformation("Successfully processed health check request.");
                 }
 
                 _logger.LogDebug("Heartbeat check executed.");
