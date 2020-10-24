@@ -36,7 +36,7 @@ namespace OfficeCountdownClock
             _listener.Start();
             while (!stoppingToken.IsCancellationRequested)
             {
-                // Respond to the pending TCP calls every second.
+                // Gather health metrics every second.
                 await UpdateHeartbeatAsync(stoppingToken);
                 Thread.Sleep(TimeSpan.FromSeconds(1));
             }
